@@ -14,6 +14,9 @@ const HistoryBtns = () => {
   return (
     <>
       <button
+        type="button"
+        aria-label="Redo"
+        title="Redo"
         className="btn-icon text-xl"
         ref={redoRef}
         disabled={!savedMoves.length}
@@ -21,6 +24,9 @@ const HistoryBtns = () => {
         <FaRedo />
       </button>
       <button
+        type="button"
+        aria-label="Undo"
+        title="Undo"
         className="btn-icon text-xl"
         ref={undoRef}
         disabled={!myMoves.length}

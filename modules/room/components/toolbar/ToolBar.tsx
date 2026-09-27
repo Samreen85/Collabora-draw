@@ -61,6 +61,10 @@ const ToolBar = () => {
   return (
     <>
       <motion.button
+        type="button"
+        aria-label={opened ? "Hide tools" : "Show tools"}
+        aria-controls="room-toolbar"
+        aria-expanded={opened}
         className="btn-icon absolute -left-2 bottom-1/2 z-50 h-10 w-10 rounded-full bg-[#8b3dff] text-2xl transition-none lg:hidden"
         animate={{ rotate: opened ? 0 : 180 }}
         transition={{ duration: 0.2, ease: DEFAULT_EASE }}
@@ -69,6 +73,7 @@ const ToolBar = () => {
         <FiChevronRight />
       </motion.button>
       <motion.div
+        id="room-toolbar"
         className="absolute left-10 top-[50%] z-50 grid grid-cols-2 items-center gap-5 rounded-lg bg-[#8b3dff] p-5 text-white 
         xl:left-[35%] xl:top-[10%] 	xl:grid-cols-12"
         animate={{
@@ -96,13 +101,31 @@ const ToolBar = () => {
         {/* <div className="h-px w-full bg-white" /> */}
 
         {/* <BackgroundPicker /> */}
-        <button className=" btn-icon  text-2xl" onClick={handleShare}>
+        <button
+          type="button"
+          className="btn-icon text-2xl"
+          aria-label="Invite people"
+          title="Invite people"
+          onClick={handleShare}
+        >
           <IoIosShareAlt />
         </button>
-        <button className="btn-icon  text-2xl" onClick={handleDownload}>
+        <button
+          type="button"
+          className="btn-icon text-2xl"
+          aria-label="Download drawing"
+          title="Download drawing"
+          onClick={handleDownload}
+        >
           <HiOutlineDownload />
         </button>
-        <button className="btn-icon  text-xl" onClick={handleExit}>
+        <button
+          type="button"
+          className="btn-icon text-xl"
+          aria-label="Leave room"
+          title="Leave room"
+          onClick={handleExit}
+        >
           <ImExit />
         </button>
       </motion.div>
