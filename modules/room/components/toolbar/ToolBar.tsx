@@ -9,7 +9,7 @@ import { IoIosShareAlt } from "react-icons/io";
 
 import { CANVAS_SIZE } from "@/common/constants/canvasSize";
 import { DEFAULT_EASE } from "@/common/constants/easings";
-import { useViewportSize } from "@/common/hooks/useViewportSize";
+import { useMediaQuery } from "@/common/hooks/useMediaQuery";
 import { useModal } from "@/common/recoil/modal";
 
 import { useRefs } from "../../hooks/useRefs";
@@ -25,16 +25,13 @@ import ShapeSelector from "./ShapeSelector";
 const ToolBar = () => {
   const { canvasRef, bgRef } = useRefs();
   const { openModal } = useModal();
-  const { width } = useViewportSize();
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
 
   const [opened, setOpened] = useState(false);
 
   const router = useRouter();
 
-  useEffect(() => {
-    if (width >= 1024) setOpened(true);
-    else setOpened(false);
-  }, [width]);
+  useEffect(() => setOpened(isDesktop), [isDesktop]);
 
   const handleExit = () => router.push("/");
 
