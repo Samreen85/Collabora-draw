@@ -10,26 +10,50 @@ const ShareModal = () => {
   const { closeModal } = useModal();
 
   const [url, setUrl] = useState("");
+  const [copyStatus, setCopyStatus] = useState<"idle" | "copied" | "error">("idle");
 
   useEffect(() => setUrl(window.location.href), []);
 
-  const handleCopy = () => navigator.clipboard.writeText(url);
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopyStatus("copied");
+    } catch {
+      setCopyStatus("error");
+    }
+  };
 
   return (
-    <div className="relative flex flex-col items-center rounded-md bg-white p-10 pt-5">
-      <button onClick={closeModal} className="absolute top-5 right-5">
+    <div className="relative flex w-[calc(100vw-2rem)] flex-col items-center rounded-md bg-white p-6 pt-10 sm:w-auto sm:p-10 sm:pt-5">
+      <button
+        type="button"
+        onClick={closeModal}
+        aria-label="Close invite dialog"
+        className="absolute top-5 right-5"
+      >
         <AiOutlineClose />
       </button>
       <h2 className="text-2xl font-bold">Invite</h2>
       <h3>
         Room id: <p className="inline font-bold">{id}</p>
       </h3>
-      <div className="relative mt-2">
-        <input type="text" value={url} readOnly className="input sm:w-96" />
-        <button className="btn absolute right-0 h-full" onClick={handleCopy}>
-          Copy
+      <div className="mt-4 flex w-full flex-col gap-2 sm:flex-row">
+        <input
+          type="text"
+          value={url}
+          readOnly
+          aria-label="Invitation link"
+          onFocus={(event) => event.target.select()}
+          className="input min-w-0 flex-1 sm:w-96"
+        />
+        <button className="btn" type="button" onClick={handleCopy} disabled={!url}>
+          {copyStatus === "copied" ? "Copied!" : "Copy link"}
         </button>
       </div>
+      <p aria-live="polite" className="mt-2 text-sm">
+        {copyStatus === "copied" && "Invitation link copied to clipboard."}
+        {copyStatus === "error" && "Could not copy the link. Select it and copy it manually."}
+      </p>
     </div>
   );
 };
