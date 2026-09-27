@@ -19,6 +19,10 @@ const ModePicker = () => {
   return (
     <>
       <button
+        type="button"
+        aria-label="Draw mode"
+        title="Draw mode"
+        aria-pressed={options.mode === "draw"}
         className={`btn-icon text-xl ${
           options.mode === "draw" && "bg-green-400"
         }`}
@@ -33,6 +37,10 @@ const ModePicker = () => {
       </button>
 
       <button
+        type="button"
+        aria-label="Eraser mode"
+        title="Eraser mode"
+        aria-pressed={options.mode === "eraser"}
         className={`btn-icon text-xl ${
           options.mode === "eraser" && "bg-green-400"
         }`}
@@ -47,6 +55,10 @@ const ModePicker = () => {
       </button>
 
       <button
+        type="button"
+        aria-label="Select mode"
+        title="Select mode"
+        aria-pressed={options.mode === "select"}
         className={`btn-icon text-2xl ${
           options.mode === "select" && "bg-green-400"
         }`}

@@ -3,7 +3,12 @@
 @tailwind utilities;
 
 * {
-  @apply font-montserrat font-medium focus:outline-none focus:ring focus:ring-red-500;
+  @apply font-montserrat font-medium;
+}
+
+*:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #fff, 0 0 0 4px #6d28d9;
 }
 
 @layer components {
